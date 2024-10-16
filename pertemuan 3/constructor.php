@@ -15,7 +15,4 @@ class Person{
         echo "Jurusan : $this->jurusan <br>";
     }
 }
-
-
-
 ?>
