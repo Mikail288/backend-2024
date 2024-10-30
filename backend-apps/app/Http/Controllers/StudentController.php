@@ -33,4 +33,43 @@ class StudentController extends Controller
         ];
         return response()->json($data, 200);
     }
+        
+    public function update(Request $request, $id){
+        $student = Student::find($id);
+        if ($student){
+            $input = [
+                'nama' => $request->nama,
+                'nim' => $request->nim,
+                'email' => $request->email,
+                'jurusan' => $request->jurusan,
+            ]; 
+            $student->update($input);
+            $data = [
+                'message' => 'berhasil mengupdate data',
+                'data' => $student
+            ];
+            return response()->json($data, 200);
+        } else {
+            $data = [
+                'message' => 'Student gagal diubah'
+            ];
+            return response()->json($data, 404);
+        }
+    }
+
+    public function destroy($id){
+        $student = Student::find($id);
+        if ($student){
+            $student->delete();
+            $data = [
+                'message' => 'berhasil menghapus data'
+            ];
+            return response()->json($data, 200);
+        } else {
+            $data = [
+                'message' => 'Student gagal dihapus'
+            ];
+            return response()->json($data, 404);
+        }
+    }
 }
