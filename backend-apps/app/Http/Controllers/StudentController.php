@@ -72,4 +72,20 @@ class StudentController extends Controller
             return response()->json($data, 404);
         }
     }
+
+    public function show($id) {
+        $student = Student::find($id);
+        if ($student){
+            $data = [
+                'message' => 'berhasil menampilkan data',
+                'data' => $student
+                ];
+                return response()->json($data, 200);
+                } else {
+                    $data = [
+                        'message' => 'Student gagal ditampilkan'
+                        ];
+                        return response()->json($data, 404);
+                        }
+    }
 }
