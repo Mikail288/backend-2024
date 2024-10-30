@@ -79,13 +79,13 @@ class StudentController extends Controller
             $data = [
                 'message' => 'berhasil menampilkan data',
                 'data' => $student
-                ];
-                return response()->json($data, 200);
-                } else {
-                    $data = [
-                        'message' => 'Student gagal ditampilkan'
-                        ];
-                        return response()->json($data, 404);
-                        }
+            ];
+            return response()->json($data, 200);
+        } else {
+            $data = [
+                'message' => 'Student gagal ditampilkan'
+            ];
+            return response()->json($data, 404);
+        }
     }
 }
