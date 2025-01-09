@@ -15,6 +15,7 @@ class Student {
        * Menerima 2 params: query dan callback
        */
       db.query(sql, (err, results) => {
+        if (err) reject(err);
         resolve(results);
       });
     });
@@ -25,8 +26,23 @@ class Student {
    * Method menerima parameter data yang akan diinsert.
    * Method mengembalikan data student yang baru diinsert.
    */
-  static create() {
-    // code here
+  static create(data) {
+    return new Promise((resolve, reject) => {
+      const sql = "INSERT INTO students (name, nim, email, jurusan) VALUES (?, ?, ?, ?)";
+      const values = [data.name, data.nim, data.email, data.jurusan];
+
+      db.query(sql, values, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          // Mengembalikan data student yang baru diinsert
+          resolve({
+            id: result.insertId,
+            ...data,
+          });
+        }
+      });
+    });
   }
 }
 
